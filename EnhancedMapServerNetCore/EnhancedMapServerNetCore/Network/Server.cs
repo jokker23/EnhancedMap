@@ -26,6 +26,7 @@ namespace EnhancedMapServerNetCore.Network
         private Config _config;
 
         private readonly List<Session> _sessions;
+        private bool terminate;
 
         public Server(Config config)
         {
@@ -172,17 +173,26 @@ namespace EnhancedMapServerNetCore.Network
             }
         }
 
+        public void Terminate()
+        {
+            terminate = true;
+        }
+
         private void StartAccept()
         {
             bool result = false;
+            terminate = false;
 
             do
             {
                 try
                 {
-                    result = !_serverSocket.AcceptAsync(_acceptEventArgs);
+                    if (_serverSocket != null)
+                    {
+                        result = !_serverSocket.AcceptAsync(_acceptEventArgs);
+                    }
                 }
-                catch (SocketException e)
+                catch (SocketException)
                 {
                     break;
                 }
@@ -193,7 +203,7 @@ namespace EnhancedMapServerNetCore.Network
 
                 if (result)
                     ProcessAccept(_acceptEventArgs);
-            } while (result);
+            } while (result || terminate);
         }
 
         private void ProcessAccept(SocketAsyncEventArgs e)

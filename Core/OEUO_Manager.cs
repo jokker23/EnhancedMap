@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace EnhancedMap.Core
 {
@@ -29,12 +30,13 @@ namespace EnhancedMap.Core
 
         public static bool Attach(int c = 1)
         {
-            if (!File.Exists("uo.dll") || Version() != 3)
+            if (!File.Exists(DLL) || Version() != 3)
                 return false;
 
             try
             {
                 Close();
+                Thread.Sleep(500); // Without this, sometimes, next calls to DLL fails
             }
             catch
             {
@@ -69,7 +71,7 @@ namespace EnhancedMap.Core
 
         public static void Close()
         {
-            if (!File.Exists("uo.dll") || ClientHwnd == IntPtr.Zero)
+            if (!File.Exists(DLL) || ClientHwnd == IntPtr.Zero)
                 return;
             Close(ClientHwnd);
         }

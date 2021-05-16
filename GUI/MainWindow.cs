@@ -837,9 +837,7 @@ namespace EnhancedMap.GUI
         }
 
         private void ECanvas_MouseEnter(object sender, EventArgs e)
-        {
-            // win7 fix wheel scroll
-            // https://stackoverflow.com/questions/44735362/control-mousewheel-event
+        {            
             _enhancedCanvas.ECanvas.Focus();
 
             _requestRefresh = true;

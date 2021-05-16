@@ -200,7 +200,10 @@ namespace EnhancedMap.Core
                             if (f != 1)
                                 Logger.Warn("Unable to get Houses and Boats info from assistants. Probably assistants doesn't support this feature.");
 
-                            OEUO_Manager.Attach();
+                            bool dll_attached = OEUO_Manager.Attach();
+                            if (!dll_attached)
+                                Logger.Warn("Unable to attach correctly to UO.dll");
+
                             IsAttached = true;
                             hWnd = hwnd;
                             _isScanning = false;

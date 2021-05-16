@@ -32,8 +32,7 @@ namespace EnhancedMap.GUI.MapMakerSteps
                     case 0: // download
                     {
                         try
-                        {
-                            const string MAPS_DOWNLOAD_URL = "http://razorenhanced.org/download/EnhancedMapMaps/";
+                        {                            
 
                             using (WebClient wc = new WebClient {Proxy = null})
                             {
@@ -49,14 +48,12 @@ namespace EnhancedMap.GUI.MapMakerSteps
 
                                 for (int i = 0; i < 6; i++)
                                 {
-                                    string map = "2Dmap" + i + ".png";
-                                    wc.DownloadFileTaskAsync(new Uri(MAPS_DOWNLOAD_URL + map), Path.Combine("Maps", map)).Wait();
+                                    string map = "2Dmap" + i + ".png";                                    
                                 }
 
                                 for (int i = 0; i < 6; i++)
                                 {
-                                    string map = "map" + i + ".png";
-                                    wc.DownloadFileTaskAsync(new Uri(MAPS_DOWNLOAD_URL + map), Path.Combine("Maps", map)).Wait();
+                                    string map = "map" + i + ".png";                                    
                                 }
                             }
                         }

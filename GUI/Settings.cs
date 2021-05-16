@@ -78,8 +78,7 @@ namespace EnhancedMap.GUI
             {
                 SaveSettings();
                 Hide();
-            };
-            pictureBox1.Click += (sender, e) => { Process.Start("https://www.paypal.me/muskara/"); };
+            };            
 
             LoadSettings();
 

@@ -168,6 +168,8 @@ namespace EnhancedMapServerNetCore
         {
             IsRunning = false;
             //Server.Stop();
+            Server.Terminate();
+            Thread.Sleep(100); // Safe sleep ?
             ServerShuttingDown.Raise(crashed);
             SettingsManager.Save(true);
             SettingsManager.Save();

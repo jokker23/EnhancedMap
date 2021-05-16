@@ -527,7 +527,17 @@ namespace EnhancedMap.Core
 
         private static UOPFile[] ReadUOPFile(string path, string pattern)
         {
-            using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
+            FileStream mapfile = null;
+            try
+            {
+                mapfile = File.Open(path, FileMode.Open);
+            } 
+            catch (Exception)
+            {
+                throw new IOException("Unable to access file " + path + "\nTry closing Ultima client");
+            }
+
+            using (BinaryReader reader = new BinaryReader(mapfile))
             {
                 reader.BaseStream.Seek(0, SeekOrigin.Begin);
 
